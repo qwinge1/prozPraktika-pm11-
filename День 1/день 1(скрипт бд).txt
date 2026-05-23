@@ -1,0 +1,271 @@
+USE [master]
+GO
+/****** Object:  Database [Школьный_Журнал]    Script Date: 23.05.2026 13:05:36 ******/
+CREATE DATABASE [Школьный_Журнал]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'Школьный_Журнал', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\Школьный_Журнал.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'Школьный_Журнал_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL16.SQLEXPRESS\MSSQL\DATA\Школьный_Журнал_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
+GO
+ALTER DATABASE [Школьный_Журнал] SET COMPATIBILITY_LEVEL = 160
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [Школьный_Журнал].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [Школьный_Журнал] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [Школьный_Журнал] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [Школьный_Журнал] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [Школьный_Журнал] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [Школьный_Журнал] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [Школьный_Журнал] SET AUTO_CLOSE ON 
+GO
+ALTER DATABASE [Школьный_Журнал] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [Школьный_Журнал] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [Школьный_Журнал] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [Школьный_Журнал] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [Школьный_Журнал] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [Школьный_Журнал] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [Школьный_Журнал] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [Школьный_Журнал] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [Школьный_Журнал] SET  ENABLE_BROKER 
+GO
+ALTER DATABASE [Школьный_Журнал] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [Школьный_Журнал] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [Школьный_Журнал] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [Школьный_Журнал] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [Школьный_Журнал] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [Школьный_Журнал] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [Школьный_Журнал] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [Школьный_Журнал] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [Школьный_Журнал] SET  MULTI_USER 
+GO
+ALTER DATABASE [Школьный_Журнал] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [Школьный_Журнал] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [Школьный_Журнал] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [Школьный_Журнал] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [Школьный_Журнал] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [Школьный_Журнал] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+ALTER DATABASE [Школьный_Журнал] SET QUERY_STORE = ON
+GO
+ALTER DATABASE [Школьный_Журнал] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30), DATA_FLUSH_INTERVAL_SECONDS = 900, INTERVAL_LENGTH_MINUTES = 60, MAX_STORAGE_SIZE_MB = 1000, QUERY_CAPTURE_MODE = AUTO, SIZE_BASED_CLEANUP_MODE = AUTO, MAX_PLANS_PER_QUERY = 200, WAIT_STATS_CAPTURE_MODE = ON)
+GO
+USE [Школьный_Журнал]
+GO
+/****** Object:  Table [dbo].[Классы]    Script Date: 23.05.2026 13:05:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Классы](
+	[ID_класса] [int] IDENTITY(1,1) NOT NULL,
+	[Номер_класса] [int] NOT NULL,
+	[Буква_класса] [char](1) NOT NULL,
+	[Учебный_год] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID_класса] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Оценки]    Script Date: 23.05.2026 13:05:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Оценки](
+	[ID_оценки] [int] IDENTITY(1,1) NOT NULL,
+	[ID_ученика] [int] NOT NULL,
+	[ID_предмета] [int] NOT NULL,
+	[Дата_получения] [date] NOT NULL,
+	[Оценка] [int] NOT NULL,
+	[Тип_контроля] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID_оценки] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Пользователи]    Script Date: 23.05.2026 13:05:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Пользователи](
+	[ID_пользователя] [int] IDENTITY(1,1) NOT NULL,
+	[Логин] [varchar](50) NOT NULL,
+	[Хеш_пароля] [varchar](255) NOT NULL,
+	[Роль] [varchar](20) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID_пользователя] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Предметы]    Script Date: 23.05.2026 13:05:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Предметы](
+	[ID_предмета] [int] IDENTITY(1,1) NOT NULL,
+	[Название] [varchar](100) NOT NULL,
+	[Часов_в_неделю] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID_предмета] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Учащиеся]    Script Date: 23.05.2026 13:05:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Учащиеся](
+	[ID_ученика] [int] IDENTITY(1,1) NOT NULL,
+	[ФИО] [varchar](150) NOT NULL,
+	[Дата_рождения] [date] NOT NULL,
+	[ID_класса] [int] NOT NULL,
+	[Логин] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID_ученика] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Учителя]    Script Date: 23.05.2026 13:05:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Учителя](
+	[ID_учителя] [int] IDENTITY(1,1) NOT NULL,
+	[ФИО] [varchar](150) NOT NULL,
+	[ID_предмета] [int] NOT NULL,
+	[Стаж_лет] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ID_учителя] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Index [idx_оценки_предмет]    Script Date: 23.05.2026 13:05:36 ******/
+CREATE NONCLUSTERED INDEX [idx_оценки_предмет] ON [dbo].[Оценки]
+(
+	[ID_предмета] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [idx_оценки_ученик]    Script Date: 23.05.2026 13:05:36 ******/
+CREATE NONCLUSTERED INDEX [idx_оценки_ученик] ON [dbo].[Оценки]
+(
+	[ID_ученика] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [UQ__Пользова__BC2217D3BD9635F0]    Script Date: 23.05.2026 13:05:36 ******/
+ALTER TABLE [dbo].[Пользователи] ADD UNIQUE NONCLUSTERED 
+(
+	[Логин] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [idx_пользователи_логин]    Script Date: 23.05.2026 13:05:36 ******/
+CREATE NONCLUSTERED INDEX [idx_пользователи_логин] ON [dbo].[Пользователи]
+(
+	[Логин] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [UQ__Предметы__38DA803551CD1AAB]    Script Date: 23.05.2026 13:05:36 ******/
+ALTER TABLE [dbo].[Предметы] ADD UNIQUE NONCLUSTERED 
+(
+	[Название] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Object:  Index [UQ__Учащиеся__BC2217D3DA73EE45]    Script Date: 23.05.2026 13:05:36 ******/
+ALTER TABLE [dbo].[Учащиеся] ADD UNIQUE NONCLUSTERED 
+(
+	[Логин] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [idx_учащиеся_класс]    Script Date: 23.05.2026 13:05:36 ******/
+CREATE NONCLUSTERED INDEX [idx_учащиеся_класс] ON [dbo].[Учащиеся]
+(
+	[ID_класса] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Object:  Index [idx_учителя_предмет]    Script Date: 23.05.2026 13:05:36 ******/
+CREATE NONCLUSTERED INDEX [idx_учителя_предмет] ON [dbo].[Учителя]
+(
+	[ID_предмета] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Оценки] ADD  DEFAULT ('текущая') FOR [Тип_контроля]
+GO
+ALTER TABLE [dbo].[Пользователи] ADD  DEFAULT ('student') FOR [Роль]
+GO
+ALTER TABLE [dbo].[Предметы] ADD  DEFAULT ((3)) FOR [Часов_в_неделю]
+GO
+ALTER TABLE [dbo].[Учителя] ADD  DEFAULT ((0)) FOR [Стаж_лет]
+GO
+ALTER TABLE [dbo].[Оценки]  WITH CHECK ADD FOREIGN KEY([ID_предмета])
+REFERENCES [dbo].[Предметы] ([ID_предмета])
+GO
+ALTER TABLE [dbo].[Оценки]  WITH CHECK ADD FOREIGN KEY([ID_ученика])
+REFERENCES [dbo].[Учащиеся] ([ID_ученика])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Учащиеся]  WITH CHECK ADD FOREIGN KEY([ID_класса])
+REFERENCES [dbo].[Классы] ([ID_класса])
+GO
+ALTER TABLE [dbo].[Учителя]  WITH CHECK ADD FOREIGN KEY([ID_предмета])
+REFERENCES [dbo].[Предметы] ([ID_предмета])
+GO
+ALTER TABLE [dbo].[Классы]  WITH CHECK ADD CHECK  (([Номер_класса]>=(1) AND [Номер_класса]<=(11)))
+GO
+ALTER TABLE [dbo].[Оценки]  WITH CHECK ADD CHECK  (([Оценка]>=(2) AND [Оценка]<=(5)))
+GO
+ALTER TABLE [dbo].[Пользователи]  WITH CHECK ADD CHECK  (([Роль]='student' OR [Роль]='teacher' OR [Роль]='admin'))
+GO
+ALTER TABLE [dbo].[Предметы]  WITH CHECK ADD CHECK  (([Часов_в_неделю]>=(1) AND [Часов_в_неделю]<=(8)))
+GO
+USE [master]
+GO
+ALTER DATABASE [Школьный_Журнал] SET  READ_WRITE 
+GO
