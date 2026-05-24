@@ -76,7 +76,7 @@ namespace SchoolJournalApp {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/SchoolJournalApp;component/editattendancewindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/SchoolJournalApp;V1.0.0.0;component/editattendancewindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\EditAttendanceWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

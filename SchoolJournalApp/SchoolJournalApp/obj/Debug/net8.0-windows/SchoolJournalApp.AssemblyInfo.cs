@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SchoolJournalApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b3ab104d4e1deee6b21ccdfb7bc7f29c485f8619")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+db19cf62b8bd90d86a8e4aac09c1854695bd8fa0")]
 [assembly: System.Reflection.AssemblyProductAttribute("SchoolJournalApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SchoolJournalApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
