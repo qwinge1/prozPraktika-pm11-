@@ -1,0 +1,56 @@
+﻿<Window x:Class="SchoolJournalApp.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="О программе" Height="463" Width="546"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Border Background="#F0F2F5" Padding="20">
+        <StackPanel VerticalAlignment="Center">
+            <TextBlock Text="🏫 Школьный журнал" FontSize="28" FontWeight="Bold" Foreground="#2C3E50" HorizontalAlignment="Center"/>
+            <TextBlock Text="Версия 1.0" FontSize="14" Foreground="Gray" HorizontalAlignment="Center" Margin="0,5,0,15"/>
+
+            <Separator Margin="0,10,0,10" Background="#BDC3C7" Height="1"/>
+
+            <StackPanel Margin="0,10,0,10">
+                <TextBlock FontWeight="Bold" Margin="0,5">Разработчик:</TextBlock>
+                <TextBlock>Исупов Дмитрий Андреевич</TextBlock>
+                <TextBlock>Студент группы 23П-2</TextBlock>
+                <TextBlock>Специальность 09.02.07 Информационные системы и программирование</TextBlock>
+            </StackPanel>
+
+            <StackPanel Margin="0,10,0,10">
+                <TextBlock FontWeight="Bold" Margin="0,5">О приложении:</TextBlock>
+                <TextBlock TextWrapping="Wrap" TextAlignment="Justify">
+                    Приложение разработано для автоматизации учёта успеваемости учащихся школы.
+                    Реализованы операции CRUD для таблицы "Учащиеся", формирование отчётов
+                    (отличники, средний балл по классам, успеваемость по предметам),
+                    экспорт данных в CSV и Excel, разграничение прав доступа.
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="© 2026" FontSize="10" Foreground="Gray" VerticalAlignment="Center"/>
+                <TextBlock Text="   |   " FontSize="10" Foreground="Gray"/>
+                <TextBlock Text="Все права защищены" FontSize="10" Foreground="Gray"/>
+            </StackPanel>
+
+            <Button Content="OK" Width="80" Height="30" Margin="0,20,0,0" 
+                    HorizontalAlignment="Center" Click="btnClose_Click"
+                    Background="#3498DB" Foreground="White" BorderThickness="0" Cursor="Hand">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#2980B9"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
+    </Border>
+</Window>
